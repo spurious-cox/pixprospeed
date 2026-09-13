@@ -456,7 +456,7 @@ v2.5.0  (2026-08-15)
     picked, and the engine addresses it with `tell application <path>`.
 
 
-v2.5.1  (2026-09-13)  — current
+v2.5.1  (2026-09-13)
     Documentation release; no change to the effect. Adds a HOW TO USE IT
     section — numbered steps from selecting the layer, through every dialog
     field and its units, to what the result group contains — and fills in a
@@ -467,6 +467,15 @@ v2.5.1  (2026-09-13)  — current
     Also corrects the version the panel announces: main.py still had 2.4.0
     while the bundle said 2.5.0, and a docstring paragraph still described
     measuring as manual-only, which AUTO_MEASURE had already changed.
+
+
+v2.6.0  (2026-09-13)  — current
+    Checks for a newer release, from an Updates… button on the Flip row. It asks GitHub for
+    the newest published tag and reports what it finds, offering the releases
+    page and the `brew upgrade` line — it never downloads or replaces itself,
+    because a running bundle cannot safely overwrite its own files. Versions are
+    compared as integers, so 3.10.0 counts as newer than 3.9.0 rather than
+    older.
 
 
 -----------------------------------------------------------------------------

@@ -3,7 +3,7 @@
 Copyright (c) 2026 Tim McCoy. All rights reserved.
 Developed with assistance from Claude (Anthropic).
 
-Version 2.5.1 (2026-09-13)
+Version 2.6.0 (2026-09-13)
 
 A persistent alternative to the PixProSpeed applet's one-shot dialog.
 The panel stays on screen beside Pixelmator Pro: pick a layer, set the
@@ -71,9 +71,10 @@ import objc
 from Foundation import NSAttributedString, NSObject, NSTimer
 from PyObjCTools import AppHelper
 
+import pixpro_updates
 from pixprospeed import detect, pixelmator, state
 
-VERSION = "2.5.1"
+VERSION = "2.6.0"
 
 PANEL_W = 316
 POLL_SECONDS = 1.0
@@ -259,6 +260,11 @@ class Controller(NSObject):
         y -= 34
         self.flip_button = self._button("Flip 180°", (W - 118) / 2, y, 118, 26,
                                         b"flip:", size=12)
+        # Sits on Flip's row rather than the one below it: the bottom row is
+        # two half-width buttons, and a third would leave all three too narrow
+        # to read.
+        self.updates_button = self._button("Updates…", M, y, 88, 26,
+                                           b"checkForUpdates:", size=12)
 
         y -= 26
         self.status_label = self._label("", M, y, W - 2 * M, 18, size=10,
@@ -276,6 +282,11 @@ class Controller(NSObject):
 
         self._place_panel()
         panel.orderFrontRegardless()
+
+    def checkForUpdates_(self, sender):
+        """Ask GitHub what the newest release is. Reports only — see the module."""
+        pixpro_updates.check_for_updates(
+            "PixProSpeed", "pixprospeed", VERSION, NSApp.applicationIconImage())
 
     @objc.python_method
     def _place_panel(self):
