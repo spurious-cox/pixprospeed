@@ -1,4 +1,4 @@
-# PixProSpeed
+# PixProSpeed 2.6.1
 
 Makes a Pixelmator Pro layer look like it is moving fast: a run of stutter
 subimages trailing back along the direction of travel, wrapped in a soft
@@ -12,9 +12,6 @@ or install it with Homebrew:
 ```
 brew install --cask spurious-cox/tap/pixprospeed
 ```
-
-*2.6.1 is an icon change only — nothing else about the app has changed.*
-
 Requires Pixelmator Pro. Both the 3.x build and the Creator Studio build work;
 the app binds to whichever one is in front or has a document open.
 
