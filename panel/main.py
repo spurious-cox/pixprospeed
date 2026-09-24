@@ -74,7 +74,7 @@ from PyObjCTools import AppHelper
 import pixpro_updates
 from pixprospeed import detect, pixelmator, state
 
-VERSION = "2.6.0"
+VERSION = "2.6.2"
 
 PANEL_W = 316
 POLL_SECONDS = 1.0

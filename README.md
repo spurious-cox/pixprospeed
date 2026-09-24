@@ -1,4 +1,4 @@
-# PixProSpeed 2.6.1
+# PixProSpeed 2.6.2
 
 Makes a Pixelmator Pro layer look like it is moving fast: a run of stutter
 subimages trailing back along the direction of travel, wrapped in a soft

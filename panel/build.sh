@@ -1,5 +1,5 @@
 #!/bin/zsh
-# Build, sign and install PixProSpeed.app — v2.0.0
+# Build, sign and install PixProSpeed.app — v2.1.0
 #
 # Signing uses the Apple Development certificate (renewed 2026-08-05, valid to
 # 2027-08-05), selected by SHA-1 HASH rather than by name: the expired 2023
@@ -35,6 +35,11 @@ osacompile -o engine.scpt engine.applescript
 echo "==> building"
 rm -rf build dist
 ./venv/bin/python setup.py py2app >/dev/null
+
+# macOS 26+ draws an app that has only an .icns shrunk onto a plain plate.
+# The Icon Composer document compiles into Assets.car, which macOS 26+ uses
+# instead; the .icns from setup.py is still what macOS 13-25 show.
+~/bin/glass_icon dist/PixProSpeed.app ../icon/AppIcon.icon
 
 # py2app copies liblzma.5.dylib (pulled in by Pillow) in a state codesign
 # rejects: it strips the signature but leaves the LC_CODE_SIGNATURE load
