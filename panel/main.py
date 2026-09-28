@@ -43,6 +43,7 @@ from AppKit import (
     NSApp,
     NSApplication,
     NSBackingStoreBuffered,
+    NSBezelStyleHelpButton,
     NSBezelStyleRounded,
     NSBox,
     NSButton,
@@ -61,6 +62,8 @@ from AppKit import (
     NSWindowStyleMaskNonactivatingPanel,
     NSWindowStyleMaskTitled,
     NSWindowStyleMaskUtilityWindow,
+    NSWorkspace,
+    NSWorkspaceOpenConfiguration,
 )
 from AppKit import (
     NSWindowCollectionBehaviorCanJoinAllSpaces,
@@ -68,13 +71,13 @@ from AppKit import (
     NSWindowCollectionBehaviorStationary,
 )
 import objc
-from Foundation import NSAttributedString, NSObject, NSTimer
+from Foundation import NSAttributedString, NSBundle, NSObject, NSTimer, NSURL
 from PyObjCTools import AppHelper
 
 import pixpro_updates
 from pixprospeed import detect, pixelmator, state
 
-VERSION = "2.6.2"
+VERSION = "2.6.3"
 
 PANEL_W = 316
 POLL_SECONDS = 1.0
@@ -238,6 +241,10 @@ class Controller(NSObject):
         self._label("Direction", M, y + 3, LBL_W, 18, size=12)
         self.direction_field = self._field(state.get("direction"), FLD_X, y, FLD_W, h=22, size=12)
         self.measure_button = self._button("Measure", HINT_X, y - 2, 92, 26, b"measure:", size=12)
+        # The round ? opens the Read Me, whose how-to shows every Direction.
+        help_button = self._button("", W - M - 22, y, 22, 22, b"showReadMe:")
+        help_button.setBezelStyle_(NSBezelStyleHelpButton)
+        help_button.setToolTip_("Read Me, with a diagram of every Direction")
 
         y -= 34
         self._label("Distance", M, y + 3, LBL_W, 18, size=12)
@@ -282,6 +289,21 @@ class Controller(NSObject):
 
         self._place_panel()
         panel.orderFrontRegardless()
+
+    def showReadMe_(self, sender):
+        """Open the Read Me that ships in the bundle, in TextEdit: the RTFD
+        is the text Read Me with the Direction diagram in place."""
+        path = NSBundle.mainBundle().pathForResource_ofType_(
+            "PixProSpeed-README", "rtfd")
+        editor = NSWorkspace.sharedWorkspace().\
+            URLForApplicationWithBundleIdentifier_("com.apple.TextEdit")
+        if path is None or editor is None:
+            self.setStatus_("The Read Me is missing from the app.")
+            return
+        NSWorkspace.sharedWorkspace().\
+            openURLs_withApplicationAtURL_configuration_completionHandler_(
+                [NSURL.fileURLWithPath_(path)], editor,
+                NSWorkspaceOpenConfiguration.configuration(), None)
 
     def checkForUpdates_(self, sender):
         """Ask GitHub what the newest release is. Reports only — see the module."""

@@ -1,4 +1,4 @@
-# PixProSpeed 2.6.2
+# PixProSpeed 2.6.3
 
 Makes a Pixelmator Pro layer look like it is moving fast: a run of stutter
 subimages trailing back along the direction of travel, wrapped in a soft
@@ -30,6 +30,10 @@ focus from it, so you can leave it up while you work.
    | Direction | degrees, 0 = right, 90 = down |
    | Distance | pixels, mm or math — how far the trail runs |
    | Subimages | how many stutter ghosts trail behind |
+
+   ![Every Direction and the way the trail runs](PixProSpeed-angles.png)
+
+   The round **?** beside Measure opens the Read Me, which shows the same diagram.
 
    Switch **Remove background** on for a photo layer whose subject sits on a
    background.

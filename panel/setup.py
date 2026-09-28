@@ -23,7 +23,7 @@ APP = ["main.py"]
 # logic stays readable AppleScript rather than a Python string.
 # The README ships INSIDE the bundle (Contents/Resources) so it travels
 # with the app and nothing depends on ~/My_Applications existing.
-DATA_FILES = ["engine.scpt", "../PixProSpeed-README.txt"]
+DATA_FILES = ["engine.scpt", "../PixProSpeed-README.txt", "PixProSpeed-README.rtfd"]
 
 OPTIONS = {
     "argv_emulation": False,
@@ -42,8 +42,8 @@ OPTIONS = {
         "CFBundleName": "PixProSpeed",
         "CFBundleDisplayName": "PixProSpeed",
         "CFBundleIdentifier": "com.timmccoy.pixprospeed",
-        "CFBundleShortVersionString": "2.6.2",
-        "CFBundleVersion": "2.6.2",
+        "CFBundleShortVersionString": "2.6.3",
+        "CFBundleVersion": "2.6.3",
         "LSMinimumSystemVersion": "13.0",
         "NSHighResolutionCapable": True,
         # A floating utility panel, not an app to switch to: no Dock icon,

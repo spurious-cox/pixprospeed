@@ -36,6 +36,8 @@ its own archived README, but it is no longer built or installed.
 
     3. Set the numbers:
            Direction   degrees, 0 = right, 90 = down
+       The round ? beside Measure opens this Read Me.
+       Every Direction is drawn in PixProSpeed-angles.png.
            Distance    pixels, mm or math — how far the trail runs
            Subimages   how many stutter ghosts trail behind
        Switch Remove background on for a photo layer whose subject sits

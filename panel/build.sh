@@ -32,6 +32,10 @@ echo "==> compiling the AppleScript engine"
 rm -f engine.scpt
 osacompile -o engine.scpt engine.applescript
 
+echo "==> building the Read Me (text + Direction diagram)"
+../../_signing/pixpro_readme_rtfd.py ../PixProSpeed-README.txt \
+    PixProSpeed-README.rtfd ../PixProSpeed-angles.png
+
 echo "==> building"
 rm -rf build dist
 ./venv/bin/python setup.py py2app >/dev/null
@@ -95,6 +99,7 @@ echo "==> installed:"
 codesign -dv /Applications/PixProSpeed.app 2>&1 | grep -E "Identifier=|Authority=|Timestamp="
 plutil -extract CFBundleShortVersionString raw /Applications/PixProSpeed.app/Contents/Info.plist
 echo "==> engine present: $(test -f /Applications/PixProSpeed.app/Contents/Resources/engine.scpt && echo yes || echo NO)"
+echo "==> Read Me present: $(test -d /Applications/PixProSpeed.app/Contents/Resources/PixProSpeed-README.rtfd && echo yes || echo NO)"
 echo "==> running instances: $(pgrep -x PixProSpeed | wc -l | tr -d ' ')"
 echo
 echo "The panel is LSUIElement: no Dock icon and no menu bar."
