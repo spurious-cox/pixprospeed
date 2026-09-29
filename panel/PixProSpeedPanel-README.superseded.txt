@@ -11,7 +11,7 @@ untouched. This is an alternative front end onto the same effect, not a
 replacement, until you decide to retire the applet.
 
 App:      /Applications/PixProSpeedPanel.app
-Project:  ~/My_Applications/PixProSpeed/panel/
+Project:  panel/ in this repository
 Build:    ./build.sh          (compiles the engine, builds, signs, installs)
 Settings: ~/.pixprospeed_defaults.plist   — SHARED with the applet
 

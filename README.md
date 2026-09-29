@@ -1,4 +1,4 @@
-# PixProSpeed 2.6.3
+# PixProSpeed 2.6.4
 
 Makes a Pixelmator Pro layer look like it is moving fast: a run of stutter
 subimages trailing back along the direction of travel, wrapped in a soft
@@ -22,7 +22,9 @@ focus from it, so you can leave it up while you work.
 
 1. Launch it, then select a layer in Pixelmator Pro. The panel picks it up
    within a second, shows its name, and measures a suggested direction; the
-   note underneath says where that suggestion came from.
+   note underneath says where that suggestion came from. The layer has to be
+   at the **top level** of the Layers list; for one inside a group the panel
+   says so — drag it out first and move the result back afterward.
 2. Set the numbers:
 
    | Field | Means |
@@ -63,10 +65,8 @@ leaves gaps along the trail's flanks.
 cd panel && ./build.sh
 ```
 
-Signing uses a Developer ID certificate selected by SHA-1 hash and timestamped,
-which is what keeps macOS's Automation grant alive across rebuilds.
-`~/My_Applications/_signing/pixpro_release.sh all <App>` signs and notarizes;
-`pixpro_publish.sh <App>` wraps it in the DMG and updates the cask.
+The app is signed with a timestamped Developer ID certificate, which keeps
+macOS's Automation grant alive across rebuilds, then notarized and stapled.
 
 ## Problems or suggestions
 

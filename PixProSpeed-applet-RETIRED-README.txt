@@ -8,7 +8,7 @@ along the direction of travel, wrapped in a soft, fading motion smear that
 spans the whole distance. It works with text, shape, and image layers.
 
 Applet:   /Applications/PixProSpeed.app
-Source:   ~/My_Applications/PixProSpeed/PixProSpeed.applescript
+Source:   PixProSpeed.applescript in this repository
 Defaults: ~/.pixprospeed_defaults.plist
 
 

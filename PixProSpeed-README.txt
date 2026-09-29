@@ -10,7 +10,7 @@ the direction of travel, wrapped in a soft, fading motion smear that spans
 the whole distance. Text, shape and image layers all work.
 
 App:      /Applications/PixProSpeed.app
-Project:  ~/My_Applications/PixProSpeed/panel/
+Project:  panel/ in this repository
 Build:    ./build.sh          (compiles the engine, builds, signs, installs)
 Settings: ~/.pixprospeed_defaults.plist
 Read Me:  embedded in the app bundle (Contents/Resources), so it travels
@@ -18,7 +18,7 @@ Read Me:  embedded in the app bundle (Contents/Resources), so it travels
 
 HISTORY: PixProSpeed began as an AppleScript applet. The applet is RETIRED —
 this Python/PyObjC panel is what /Applications/PixProSpeed.app now is. The
-old applet source is preserved at ~/My_Applications/PixProSpeed/ alongside
+old applet source is preserved at the top of this repository alongside
 its own archived README, but it is no longer built or installed.
 
 -----------------------------------------------------------------------------
@@ -32,7 +32,9 @@ its own archived README, but it is no longer built or installed.
     2. Select a layer in Pixelmator Pro. The panel picks it up within a
        second, shows its name, and measures a suggested direction; the
        note under the name says where that suggestion came from. Measure
-       runs that measurement again by hand.
+       runs that measurement again by hand. The layer has to be at the
+       TOP LEVEL of the Layers list; for one inside a group the panel says
+       so — drag it out first and move the result back afterward.
 
     3. Set the numbers:
            Direction   degrees, 0 = right, 90 = down
