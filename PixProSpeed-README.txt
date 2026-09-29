@@ -162,11 +162,13 @@ SUBIMAGES AS SEPARATE LAYERS
     individual stutter frame can be nudged, retimed, or deleted after the
     fact.
 
-MOTION-BLUR ANGLE SIGN
-    Pixelmator's motion-effect angle is measured counter-clockwise in a
-    Y-UP frame, while layer positions are Y-DOWN, so the angle is negated
-    before use. That flip lives in one property (motionAngleSign) — if a
-    diagonal streak ever blurs across the wrong diagonal, set it to 1.
+MOTION-BLUR ANGLE
+    Pixelmator's motion-effect angle is a screen angle — 0 = right,
+    90 = down — the same frame the Direction field uses, so the direction
+    passes to the blur unchanged. A controlled render confirmed it: a motion
+    effect requested at 0, 45 and 90 smears along exactly 0, 45 and 90 on
+    screen. The property motionAngleSign is therefore 1; -1 would turn the
+    blur across the trail instead of along it, which shows as banding.
 
 MERGE POSITION IS USED AS-IS
     The merged smear layer is left exactly where Pixelmator reports it.
@@ -298,8 +300,8 @@ Properties at the top of the source, all safe to adjust and recompile:
     ghostEndOpacity     opacity % of the farthest ghost
     ghostStartBlur      motion-blur radius of the nearest ghost
     ghostEndBlur        motion-blur radius of the farthest ghost
-    motionAngleSign     -1 or 1; flip if a diagonal streak blurs across
-                        the wrong diagonal
+    motionAngleSign     1 (the blur runs along the Direction as given);
+                        -1 would blur across the trail
     maxBlurRadius       Pixelmator's blur sliders top out at 100
     maxSubimages        upper clamp on the subimage count
     shapeMinElongation  long:short ratio a shape needs before it counts as
