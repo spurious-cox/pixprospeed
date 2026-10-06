@@ -77,7 +77,7 @@ from PyObjCTools import AppHelper
 import pixpro_updates
 from pixprospeed import detect, pixelmator, state
 
-VERSION = "2.6.5"
+VERSION = "2.7.0"
 
 PANEL_W = 316
 POLL_SECONDS = 1.0
@@ -289,6 +289,9 @@ class Controller(NSObject):
 
         self._place_panel()
         panel.orderFrontRegardless()
+        # The same automatic check every PixPro app makes when it opens: once a
+        # day at most, silent unless there is a newer release.
+        pixpro_updates.announce("pixprospeed", VERSION, self.post_status)
 
     def showReadMe_(self, sender):
         """Open the Read Me that ships in the bundle, in TextEdit: the RTFD

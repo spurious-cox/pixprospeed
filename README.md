@@ -1,4 +1,4 @@
-# PixProSpeed 2.6.5
+# PixProSpeed 2.7.0
 
 Makes a Pixelmator Pro layer look like it is moving fast: a run of stutter
 subimages trailing back along the direction of travel, wrapped in a soft
@@ -67,6 +67,16 @@ cd panel && ./build.sh
 
 The app is signed with a timestamped Developer ID certificate, which keeps
 macOS's Automation grant alive across rebuilds, then notarized and stapled.
+
+## Updates
+
+When it opens, PixProSpeed asks GitHub whether a newer release exists — at most
+once a day, giving up after three seconds — and says nothing if you are up to
+date or offline. If there is a newer one, it shows in the status line:
+
+    Update available: X.Y.Z  —  brew upgrade --cask pixprospeed
+
+It only ever reports: nothing is downloaded and nothing replaces itself.
 
 ## Problems or suggestions
 
