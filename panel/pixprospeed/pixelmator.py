@@ -28,6 +28,36 @@ from AppKit import NSWorkspace
 BUNDLE_IDS = ("com.apple.pixelmator", "com.pixelmatorteam.pixelmator.x")
 
 
+_TOP_JS = (
+    'ObjC.import("CoreGraphics");ObjC.import("AppKit");'
+    'function top(o){var l=ObjC.deepUnwrap(ObjC.castRefToObject('
+    '$.CGWindowListCopyWindowInfo(o,0)));'
+    'for(var i=0;i<l.length;i++){var w=l[i];'
+    'if(w.kCGWindowOwnerName=="Pixelmator Pro"&&w.kCGWindowLayer==0'
+    '&&w.kCGWindowBounds.Height>100)return w.kCGWindowOwnerPID;}return 0;}'
+    'var p=top(17);if(!p)p=top(16);'
+    'var a=p?$.NSRunningApplication.runningApplicationWithProcessIdentifier(p):null;'
+    'a?(p+"\\t"+ObjC.unwrap(a.bundleIdentifier)+"\\t"+ObjC.unwrap(a.bundleURL.path)):""')
+
+
+def top_pixelmator():
+    """(pid, bundle id, bundle path) of the Pixelmator Pro build whose window
+    is topmost, or None. This is the build the person is looking at: the
+    window list is ordered front to back, so it stays right when this app was
+    started from Stache, Flache or the Dock and is not itself frontmost.
+    Visible windows are tried first, then windows on other Spaces. Needs no
+    Screen Recording permission (owner, pid and size only)."""
+    try:
+        out = subprocess.run(["/usr/bin/osascript", "-l", "JavaScript",
+                              "-e", _TOP_JS], capture_output=True,
+                             text=True, timeout=8).stdout.strip()
+    except Exception:
+        return None
+    parts = out.split("\t")
+    return (int(parts[0]), parts[1], parts[2]) if len(parts) == 3 else None
+
+
+
 def target():
     """Bundle PATH of the Pixelmator build to drive, or "" if none qualifies.
 
@@ -41,10 +71,13 @@ def target():
     is what distinguishes identical copies. Nothing here depends on the app's
     name or location, so it works on any Mac.
 
-    Frontmost build wins; otherwise the first running build that has a
+    The build with the topmost window wins; then the active one; otherwise the first running build that has a
     document open. Resolved on every call rather than cached, because the
     panel is long-lived and the user can switch builds under it.
     """
+    top = top_pixelmator()
+    if top and top[1] in BUNDLE_IDS:
+        return top[2]
     running = []
     for app in NSWorkspace.sharedWorkspace().runningApplications():
         if app.bundleIdentifier() not in BUNDLE_IDS:
